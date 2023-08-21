@@ -1,0 +1,4 @@
+(library
+ (name tokenizer)
+ (flags
+  (:standard -warn-error -27)))
