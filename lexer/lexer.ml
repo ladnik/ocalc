@@ -12,7 +12,7 @@ type 'a token =
      | Max *)
   | Invalid
 
-module Tokenizer : sig
+module Lexer : sig
   val string_to_token_list : string -> float token list
 end = struct
   let isDigit = function '0' .. '9' -> true | _ -> false

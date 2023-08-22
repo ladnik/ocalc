@@ -1,5 +1,4 @@
 (library
- (name calc)
- (libraries lexer parser)
+ (name lexer)
  (flags
   (:standard -warn-error -27)))
