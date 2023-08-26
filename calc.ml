@@ -30,6 +30,10 @@ let tests =
   >::: [
          ( "[Lexer] Empty string sould lead to empty token list" >:: fun _ ->
            assert_equal [] (Lexer.string_to_token_list "") );
+         ( "[Lexer] Ignore whitespace" >:: fun _ ->
+           assert_equal
+             [ Number 1.; Plus; Number 2.; Plus; Number 3. ]
+             (Lexer.string_to_token_list "1 + 2 + 3") );
          ( "[Lexer] Invalid token ~" >:: fun _ ->
            assert_equal [ Invalid ] (Lexer.string_to_token_list "~") );
          ( "[Lexer] Invalid token #" >:: fun _ ->

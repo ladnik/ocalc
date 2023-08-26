@@ -1,4 +1,4 @@
-  type 'a token =
+type 'a token =
   | Number of 'a
   | Plus
   | Minus
@@ -53,6 +53,7 @@ end = struct
         | '%' -> helper (Mod :: token_acc) (cur_idx + 1)
         | '(' -> helper (LeftPar :: token_acc) (cur_idx + 1)
         | ')' -> helper (RightPar :: token_acc) (cur_idx + 1)
+        | ' ' -> helper token_acc (cur_idx + 1) (*ignore whitespaces*)
         (* | 'm' ->
             if String.length s - cur_idx < 3 then Invalid :: token_acc
             else if
@@ -66,7 +67,7 @@ end = struct
             else Invalid :: token_acc *)
         | _ -> (
             match readDigit s cur_idx with
-            | None -> [Invalid]
+            | None -> [ Invalid ]
             | Some (n, shift) -> helper (Number n :: token_acc) (cur_idx + shift)
             )
     in
