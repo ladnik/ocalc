@@ -1,5 +1,5 @@
-(library
+(executable
  (name calc)
- (libraries lexer parser)
+ (libraries lexer parser ounit2)
  (flags
   (:standard -warn-error -27)))

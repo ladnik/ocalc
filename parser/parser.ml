@@ -22,7 +22,8 @@ end = struct
         | _ -> failwith "Syntax error: Expected closing parenthesis")
     | _ ->
         failwith
-          "Syntax error: Expected highest precedence: number or parenthesis. Unary operators are not supported."
+          "Syntax error: Expected highest precedence: number or parenthesis. \
+           Unary operators are not supported."
 
   and parse_high_precedence tokens =
     let lhs, remaining = parse_highest_precedence tokens in
@@ -99,7 +100,6 @@ end = struct
     | _ -> failwith "Invalid token in string_of_token"
 
   let ast_to_graphviz filename tree =
-    (*TODO*)
     let file = open_out filename in
     Printf.fprintf file "%s" "digraph ast { \n";
     Printf.fprintf file "%s" "node [shape = circle];\n";
@@ -119,9 +119,7 @@ end = struct
             ^ string_of_node parent_id node
             ^ "->" ^ string_of_node right_id r ^ ";"
           in
-          let edge_str =
-            left_edges ^ right_edges ^ par_edges ^ "\n"
-          in
+          let edge_str = left_edges ^ right_edges ^ par_edges ^ "\n" in
           (edge_str, parent_id, parent_id + 1)
     in
     let edge_str, _, _ = helper 0 tree in

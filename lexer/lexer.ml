@@ -40,6 +40,7 @@ end = struct
 
   (*recursively read in all tokens*)
   let string_to_token_list s =
+    (*TODO: remove whitespace*)
     let rec helper token_acc cur_idx =
       if cur_idx >= String.length s then token_acc
       else
@@ -65,7 +66,7 @@ end = struct
             else Invalid :: token_acc *)
         | _ -> (
             match readDigit s cur_idx with
-            | None -> Invalid :: token_acc
+            | None -> [Invalid]
             | Some (n, shift) -> helper (Number n :: token_acc) (cur_idx + shift)
             )
     in
