@@ -1,4 +1,4 @@
-type 'a token =
+  type 'a token =
   | Number of 'a
   | Plus
   | Minus
