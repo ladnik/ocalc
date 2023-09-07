@@ -6,6 +6,8 @@ Supported operations: addition, subtraction, multiplication, division, modulus a
 
 Not supported: unary operations such as `-, !` and logical operations such as `AND, OR, ...`, as well as other useful functions like `sin, cos, sqrt, ...`
 
+If you have any questions regarding this project or ideas on improving it, feel free to contact me.
+
 ## Implementation
 As the name suggests, OCalc is implemented in the functional programming language OCaml.
 The algorithm itself consists of three parts:
@@ -25,12 +27,13 @@ It recognizes the following symbols:
 The parser takes the output token list of the lexer and converts it to an abstract syntax tree (AST)
 whilst respecting operator precedence. This is achieved by using a recursive descent parser. [[Wikipedia]](https://en.wikipedia.org/wiki/Recursive_descent_parser) [[craftinginterpreters]](http://craftinginterpreters.com/parsing-expressions.html#recursive-descent-parsing). A function to convert the AST to its graphviz representation (viewable with [Webgraphviz](http://webgraphviz.com/) is provided.
 
-### III. Evaluation
+### III. Evaluator
 Evaluation of the generated abstract syntax tree is the simplest part, it only consists in 
 recursively evaluating all subtrees by replacing the arithmetic operation nodes by their
 respective function (+), (-), etc. Evaluation will performed with floats.
 
 ## Usage
+### UTop
 To run the program in the toplevel [utop](https://github.com/ocaml-community/utop), nagivate to the source directory `ocalc/` and execute `dune utop`.
 In the toplevel, run  `#use "calc.ml"`. After that the following commands are available:
 - `generate_token_list`: Generates the list of lexer tokens from a given string. Signature: string -> float token list
@@ -39,9 +42,11 @@ In the toplevel, run  `#use "calc.ml"`. After that the following commands are av
 - `eval_string_expr`: Evaluates a given string expression, combines the three previously listed commands. Signature: string -> float
 - `print_ast_to_file`: Prints an AST in the graphviz format to the specified file. Signature: string -> float expr -> unit
 
+### Dune
 With the build system [dune](https://github.com/ocaml/dune) installed, an executable can be built from the source as follows:
 Navigate to the source directory `ocalc/` and execute `dune build calc.exe`. The executable can be run with `dune exec _build/default/calc.exe`.
 
+### OCaml compiler
 To compile the program to a binary, use the ocamlopt compiler:
 - Make sure your ocaml libraries are up to date by running `opam update`, `opam upgrade` and `eval $(opam env)`.
 - Build the modules: `ocamlopt -c lexer/lexer.ml && ocamlopt -c -I lexer parser/parser.ml && ocamlopt -c -I lexer -I parser -I $(opam var lib)/ounit2 calc.ml`
@@ -50,7 +55,7 @@ To compile the program to a binary, use the ocamlopt compiler:
 
 A pre-built executable can be found here. (TODO) 
 
-## Examples:
+## Examples
 - "1+2+3" -> 6.0
 - "1+2-3" -> 0.0
 - "2/3*3" -> 2.0
