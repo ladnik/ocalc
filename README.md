@@ -33,9 +33,25 @@ recursively evaluating all subtrees by replacing the arithmetic operation nodes 
 respective function (+), (-), etc. Evaluation will performed with floats.
 
 ## Usage
+
+To get the correct OCaml environment with utop, OUnit2 and Dune, install `opam` with your package manager and install the following packages:
+```bash
+opam init --bare
+opam switch create 5.0.0
+eval $(opam env)
+opam install ocaml-lsp-server dune utop ocamlformat ounit2
+```
+
 ### UTop
-To run the program in the toplevel [utop](https://github.com/ocaml-community/utop), nagivate to the source directory `ocalc/` and execute `dune utop`.
-In the toplevel, run  `#use "calc.ml"`. After that the following commands are available:
+To run the program in the toplevel [utop](https://github.com/ocaml-community/utop), nagivate to the source directory `ocalc/` and execute
+```bash
+dune utop
+```
+In the toplevel, run  
+```ocaml
+#use "calc.ml"
+```
+After that the following commands are available:
 - `generate_token_list`: Generates the list of lexer tokens from a given string. Signature: string -> float token list
 - `generate_syntax_tree`: Generates the AST from a list of lexer tokens. Signature: float token list -> float expr
 - `eval_syntax_tree`: Evaluates a given AST. Signature: float expr -> float
@@ -44,14 +60,37 @@ In the toplevel, run  `#use "calc.ml"`. After that the following commands are av
 
 ### Dune
 With the build system [dune](https://github.com/ocaml/dune) installed, an executable can be built from the source as follows:
-Navigate to the source directory `ocalc/` and execute `dune build calc.exe`. The executable can be run with `dune exec _build/default/calc.exe`.
+Navigate to the source directory `ocalc/` and execute 
+```bash
+dune build calc.exe
+```
+The executable can be run with
+```bash
+dune exec _build/default/calc.exe
+```
 
 ### OCaml compiler
 To compile the program to a binary, use the ocamlopt compiler:
-- Make sure your ocaml libraries are up to date by running `opam update`, `opam upgrade` and `eval $(opam env)`.
-- Build the modules: `ocamlopt -c lexer/lexer.ml && ocamlopt -c -I lexer parser/parser.ml && ocamlopt -c -I lexer -I parser -I $(opam var lib)/ounit2 calc.ml`
-- Link the modules: `ocamlfind ocamlopt -o out -package ounit2 -linkpkg lexer/lexer.cmx parser/parser.cmx calc.cmx`
-- Run the program: `./out`
+- Make sure your ocaml libraries are up to date by running the following three commands:
+```bash
+opam update
+opam upgrade
+eval $(opam env)
+```
+- Build the modules:
+```bash
+ocamlopt -c lexer/lexer.ml
+ocamlopt -c -I lexer parser/parser.ml
+ocamlopt -c -I lexer -I parser -I $(opam var lib)/ounit2 calc.ml
+```
+- Link the modules:
+```bash
+ocamlfind ocamlopt -o out -package ounit2 -linkpkg lexer/lexer.cmx parser/parser.cmx calc.cmx
+```
+- Run the program:
+```bash
+./out
+ ```
 
 A pre-built executable can be found here. (TODO) 
 
