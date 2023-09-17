@@ -49,7 +49,7 @@ dune utop
 ```
 In the toplevel, run  
 ```ocaml
-#use "calc.ml"
+#use "calc.ml";;
 ```
 After that the following commands are available:
 - `generate_token_list`: Generates the list of lexer tokens from a given string. Signature: string -> float token list
@@ -81,6 +81,7 @@ eval $(opam env)
 ```bash
 ocamlopt -c lexer/lexer.ml
 ocamlopt -c -I lexer parser/parser.ml
+ocamlopt -c -I lexer -I parser -I $(opam var lib)/ounit2 calc.mli
 ocamlopt -c -I lexer -I parser -I $(opam var lib)/ounit2 calc.ml
 ```
 - Link the modules:
